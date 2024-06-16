@@ -1,7 +1,10 @@
 from funciones import *
 import json
 
-def menu()->str:
+
+
+
+def menu()->str: #Esta funcion no retorna un string, no retorna nada
     print("\nMenu de opciones:")
     print("1. Cargar archivo CSV")
     print("2. Imprimir lista")
@@ -13,18 +16,21 @@ def menu()->str:
     print("8. Mostrar más popular")
     print("9. Salir\n")
 
-
+#no es particularmente necesaria esta funcion, podrias simplemente declarar que estas 2 banderas son falsas, ademas seria mejor usar nombres mas claros, no me es claro todavia que hacen estas 2 banderas. Tambien las consignas del parcial especificaban que todas las funciones tienen que estar en un archivo aparte
 def redes_app():
     bandera_3 = False
     bandera_1 = False
 
+#en vez de un while True, te recomiendo usar una bandera con un nombre similar a desea_continuar o algo asi, y que en la opcion de salir esa variable sea cambiada a False; es una buena practica y el profe le da mucha bola a eso
     while True:
 
         menu()
         aux = input("Ingrese la opción deseada: ")
-        opcion = int(aux)
+        opcion = int(aux) #no es realmente necesario convertir el input a un entero, ya que no se realiza ningun tipo de operacion matematica con esta variable, el match case se puede hacer con strings. Es mas, la existencia de esta linea te genera un error gravisimo en el codigo: intentas convertir un string a un int sin antes validar que este elemento pueda ser convertido a string. Si el input es cualquier tipo de caracter no numerico o un string vacio, el programa se rompe.
+
         match opcion:
             case 1:
+                # Otro while true. Igualmente este punto funciona genial, sin embargo te recomiendo mucho mas hacer loops usando banderas con nombres claros, por ej nombre_invalido. En este caso al leer "while nombre_invalido" se sabe instantaneamente que el proposito del loop es la validacion del nombre 
                 while True:
                     nombre_archivo = input("Ingrese el nombre del archivo a cargar: ")
                     try:
@@ -51,9 +57,9 @@ def redes_app():
                             
                             
                             print("El archivo se cargó con éxito")
-                        bandera_1 = True
+                        bandera_1 = True #seria mucho mejor que esta bandera se llame archivo_cargado para facilitar la legibilidad del codigo, tanto para vos como para otros que lo esten leyendo
                         break
-                    except:
+                    except: #aca podrias especificar fileNotFoundError, pero no es del todo necesario
                         print("El nombre del archivo es incorrecto o no existe. Por favor intente de nuevo.")
 
             case 2:
@@ -61,10 +67,10 @@ def redes_app():
                         mostrar_posteos(lista_posts)
                     else:
                         print("Primero debe ingresar un archivo")
-            case 3:
+            case 3: # Estaria mejor que reemplazes los valores de lista_posts en lugar de crear la nueva lista_estadisticas: esto permitiria ver las estadisticas asignadas en la segunda opcion. Como esta ahora el programa, no hay manera de ver dichas estadisticas. Es posible que esto haya sido visto como un error por el profe
                     if bandera_1:
                         lista_estadisticas = mapear_lista(lista_posts)
-                        bandera_3 = True
+                        bandera_3 = True #otra bandera con un nombre ambiguo, seria mejor que se llame estadisticas_cargadas. Ademas el hecho de que tus dos banderas sean bandera_1 y bandera_3 es un poco confuso
                     else:
                         print("Primero debe ingresar un archivo")
             case 4:
@@ -151,7 +157,7 @@ def redes_app():
 
     print("Fin del programa")
 
-redes_app()
+redes_app() # no es necesaria esta funcion, lo unico que hace aca es cambiar el valor de tus dos banderas. La razon por la que esto no tiene proposito es porque esta en la ultima linea antes de que se termine de ejecutar el programa. Nada va a volver a leer estas variables y al volver a ejecutar el programa, este no recuerda lo hecho en esta linea, comienza otra vez de 0
 
 
 

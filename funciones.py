@@ -1,3 +1,5 @@
+# falta documentacion en todas las funciones, lo cual era un requisito para la aprobacion
+
 def get_path_actual(nombre_archivo):
     import os
 
@@ -9,7 +11,7 @@ def validar_lista(lista: list) -> None:
     if not isinstance(lista, list):
         raise TypeError("Se esperaba una lista.")
     
-def sumar_lista(lista: list) -> int:
+def sumar_lista(lista: list) -> int: 
     suma = 0
     validar_lista(lista)
     for i in lista:
@@ -17,7 +19,7 @@ def sumar_lista(lista: list) -> int:
 
     return suma
 
-def calcular_promedio(lista: list) -> float:
+def calcular_promedio(lista: list) -> float: #esta funcion y la anterior no son necesarias cuando ya tenes reduce,podrias conseguir la sumatoria usando reduce y dividirla por el len de la lista, ahorrandote las lineas de codigo en estas 2 funciones
     validar_lista(lista)
     # Validación dentro de la función
     if len(lista) != 0:
@@ -93,7 +95,7 @@ def filtrar_lista(filtradora, lista: list)->list:
     return lista_filtrada
 
 
-def promedio_campo(lista:list, campo:str):
+def promedio_campo(lista:list, campo:str): #el nombre de esta funcion implica que algo se esta promediando, cuando lo que realmente hace es mostrar un dato por consola
     validar_lista(lista)
     resultado = mapear_campo(lista,campo)
         
